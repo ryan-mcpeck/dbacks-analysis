@@ -30,10 +30,24 @@ pitch_counts = starter_data.groupby(['player_name', 'pitch_name']).size().reset_
 
 # Pivot the data to get pitch usage percentages
 pitch_usage = pitch_counts.pivot(index='player_name', columns='pitch_name', values='count').fillna(0)
+
+# Calculate total counts for each pitch type across all pitchers
+total_pitch_counts = pitch_usage.sum()
+# Sort columns (pitch types) by total usage
+sorted_pitch_columns = total_pitch_counts.sort_values(ascending=False).index
+
+# Reorder the columns based on sorted pitch types
+pitch_usage = pitch_usage[sorted_pitch_columns]
 pitch_percentages = pitch_usage.div(pitch_usage.sum(axis=1), axis=0) * 100
 
 # --- Visualization ---
 print("Generating pitch usage visualization...")
+
+# Sort pitchers by number of starts (descending)
+sorted_main_starters = main_starters.sort_values('starts', ascending=False)
+# Create labels with pitcher names and starts
+pitcher_labels = [f"{name} ({starts} starts)" for name, starts in zip(sorted_main_starters['player_name'], sorted_main_starters['starts'])]
+pitch_percentages = pitch_percentages.loc[sorted_main_starters['player_name']]
 
 # Create the stacked bar chart
 ax = pitch_percentages.plot(
@@ -43,13 +57,22 @@ ax = pitch_percentages.plot(
     colormap='viridis'
 )
 
+# Update y-axis labels with the number of starts
+ax.set_yticklabels(pitcher_labels)
+
 # Set plot titles and labels
-plt.title('Pitch Usage by Diamondbacks Starting Pitchers (2025)', fontsize=16)
+plt.title('Pitch Usage by Diamondbacks Starting Pitchers (2025)', fontsize=16, pad=20)
 plt.xlabel('Pitch Percentage (%)', fontsize=12)
 plt.ylabel('Pitcher', fontsize=12)
 
+# Add gridlines
+plt.grid(axis='x', linestyle='--', alpha=0.7)
+
 # Move the legend outside the plot
-plt.legend(title='Pitch Type', bbox_to_anchor=(1.02, 1), loc='upper left')
+plt.legend(title='Pitch Type', bbox_to_anchor=(1.02, 1), loc='upper left', frameon=True)
+
+# Adjust layout to prevent label cutoff
+plt.subplots_adjust(right=0.85)
 
 plt.tight_layout()
 plt.show()
