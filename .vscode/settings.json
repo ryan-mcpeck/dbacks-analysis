@@ -1,0 +1,11 @@
+{
+  "github.copilot.chat.mcp.enabled": true,
+  "github.copilot.chat.mcp.servers": {
+    "dbacks-scout": {
+      "command": "python",
+      "args": [
+        "${workspaceFolder}/scout_mcp.py"
+      ]
+    }
+  }
+}
