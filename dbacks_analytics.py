@@ -68,7 +68,7 @@ DBACKS_BLACK = "#000000"
 DBACKS_COLORS = [DBACKS_RED, DBACKS_TEAL, DBACKS_BLACK, "#DBCEAC", "#8B0000", "#C8A882"]
 
 # ── Data Loading ──────────────────────────────────────────────────────────────
-@st.cache_data
+@st.cache_data(ttl=300)
 def load_and_enhance_data():
     """Load and enhance Diamondbacks Statcast data with derived pitch metrics.
 
