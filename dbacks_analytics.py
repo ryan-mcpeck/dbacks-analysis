@@ -37,12 +37,12 @@ st.markdown(
         color: #A71930;
         text-align: center;
         padding: 20px 0;
-        border-bottom: 3px solid #E3D4AD;
+        border-bottom: 3px solid #30CED8;
         margin-bottom: 30px;
     }
     .data-note {
-        background-color: #fff8e1;
-        border-left: 4px solid #E3D4AD;
+        background-color: #e0f7fa;
+        border-left: 4px solid #30CED8;
         padding: 12px 16px;
         border-radius: 4px;
         margin-bottom: 16px;
@@ -63,9 +63,9 @@ st.markdown(
 
 # ── D-backs Brand Colors ──────────────────────────────────────────────────────
 DBACKS_RED = "#A71930"
-DBACKS_SAND = "#E3D4AD"
+DBACKS_TEAL = "#30CED8"
 DBACKS_BLACK = "#000000"
-DBACKS_COLORS = [DBACKS_RED, DBACKS_SAND, DBACKS_BLACK, "#DBCEAC", "#8B0000", "#C8A882"]
+DBACKS_COLORS = [DBACKS_RED, DBACKS_TEAL, DBACKS_BLACK, "#DBCEAC", "#8B0000", "#C8A882"]
 
 # ── Data Loading ──────────────────────────────────────────────────────────────
 @st.cache_data
@@ -498,7 +498,7 @@ def compute_fielding_metrics(data):
 def ranking_bar_chart(df, player_col, metric_col, title, y_label, team_avg):
     """Bar chart ranking players by a metric with a team average reference line.
 
-    Bars at or above the team average are Sedona Red; below are Sonoran Sand.
+    Bars at or above the team average are Sedona Red; below are Teal.
 
     Args:
         df (pd.DataFrame): Per-player metrics dataframe.
@@ -513,7 +513,7 @@ def ranking_bar_chart(df, player_col, metric_col, title, y_label, team_avg):
     """
     sorted_df = df.sort_values(metric_col, ascending=False).copy()
     colors = [
-        DBACKS_RED if v >= team_avg else DBACKS_SAND
+        DBACKS_RED if v >= team_avg else DBACKS_TEAL
         for v in sorted_df[metric_col]
     ]
     fig = go.Figure()
@@ -531,11 +531,11 @@ def ranking_bar_chart(df, player_col, metric_col, title, y_label, team_avg):
     fig.add_hline(
         y=team_avg,
         line_dash="dash",
-        line_color=DBACKS_SAND,
+        line_color=DBACKS_TEAL,
         line_width=2,
         annotation_text=f"Team Avg: {team_avg:.2f}",
         annotation_position="top right",
-        annotation_font_color=DBACKS_SAND,
+        annotation_font_color=DBACKS_TEAL,
     )
     fig.update_layout(
         title=title,
@@ -546,7 +546,7 @@ def ranking_bar_chart(df, player_col, metric_col, title, y_label, team_avg):
         showlegend=False,
         plot_bgcolor="rgba(0,0,0,0)",
         paper_bgcolor="rgba(0,0,0,0)",
-        font=dict(color=DBACKS_SAND),
+        font=dict(color=DBACKS_TEAL),
         xaxis=dict(gridcolor="rgba(255,255,255,0.08)", linecolor="rgba(255,255,255,0.15)"),
         yaxis=dict(gridcolor="rgba(255,255,255,0.08)", linecolor="rgba(255,255,255,0.15)"),
     )
@@ -572,7 +572,7 @@ def player_vs_team_chart(player_name, player_vals, team_vals, metric_labels, tit
             x=metric_labels,
             y=team_vals,
             name="Team Average",
-            marker_color=DBACKS_SAND,
+            marker_color=DBACKS_TEAL,
             marker_line_color=DBACKS_BLACK,
             marker_line_width=1,
         )
@@ -594,7 +594,7 @@ def player_vs_team_chart(player_name, player_vals, team_vals, metric_labels, tit
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
         plot_bgcolor="rgba(0,0,0,0)",
         paper_bgcolor="rgba(0,0,0,0)",
-        font=dict(color=DBACKS_SAND),
+        font=dict(color=DBACKS_TEAL),
         xaxis=dict(gridcolor="rgba(255,255,255,0.08)", linecolor="rgba(255,255,255,0.15)"),
         yaxis=dict(gridcolor="rgba(255,255,255,0.08)", linecolor="rgba(255,255,255,0.15)"),
     )
@@ -727,7 +727,7 @@ with tab_pitch:
         st.subheader("📈 All Pitchers — Ranked by K%")
         st.caption(
             "�� Sedona Red = at or above team average · "
-            "🟡 Sonoran Sand = below team average · "
+            "🟡 Teal = below team average · "
             "Dashed line = team average"
         )
 
@@ -986,7 +986,7 @@ with tab_field:
                 height=380,
                 plot_bgcolor="rgba(0,0,0,0)",
                 paper_bgcolor="rgba(0,0,0,0)",
-                font=dict(color=DBACKS_SAND),
+                font=dict(color=DBACKS_TEAL),
             )
             st.plotly_chart(fig_bip, use_container_width=True)
 
@@ -1008,14 +1008,14 @@ with tab_field:
                 orientation="h",
                 title="Fielding Outcomes on Balls in Play",
                 color="Count",
-                color_continuous_scale=[DBACKS_SAND, DBACKS_RED],
+                color_continuous_scale=[DBACKS_TEAL, DBACKS_RED],
             )
             fig_outcomes.update_layout(
                 height=max(300, len(bip_outcomes) * 28),
                 showlegend=False,
                 plot_bgcolor="rgba(0,0,0,0)",
                 paper_bgcolor="rgba(0,0,0,0)",
-                font=dict(color=DBACKS_SAND),
+                font=dict(color=DBACKS_TEAL),
                 xaxis=dict(gridcolor="rgba(255,255,255,0.08)", linecolor="rgba(255,255,255,0.15)"),
                 yaxis=dict(gridcolor="rgba(255,255,255,0.08)", linecolor="rgba(255,255,255,0.15)"),
             )
@@ -1059,12 +1059,12 @@ with tab_field:
             fig_trend.add_hline(
                 y=fielding_summary["zone_coverage_pct"],
                 line_dash="dash",
-                line_color=DBACKS_SAND,
+                line_color=DBACKS_TEAL,
                 annotation_text=(
                     f"Season Avg: {fielding_summary['zone_coverage_pct']:.1f}%"
                 ),
                 annotation_position="top right",
-                annotation_font_color=DBACKS_SAND,
+                annotation_font_color=DBACKS_TEAL,
             )
             fig_trend.update_layout(
                 title="Zone Coverage % — Game by Game",
@@ -1073,7 +1073,7 @@ with tab_field:
                 height=380,
                 plot_bgcolor="rgba(0,0,0,0)",
                 paper_bgcolor="rgba(0,0,0,0)",
-                font=dict(color=DBACKS_SAND),
+                font=dict(color=DBACKS_TEAL),
                 xaxis=dict(gridcolor="rgba(255,255,255,0.08)", linecolor="rgba(255,255,255,0.15)"),
                 yaxis=dict(gridcolor="rgba(255,255,255,0.08)", linecolor="rgba(255,255,255,0.15)"),
             )

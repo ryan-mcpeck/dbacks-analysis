@@ -18,7 +18,7 @@ As your Assistant Coach, this tool is built to help you track the fundamental me
 
 ### 📊 Coaching UX
 1. **Team-Level Summaries:** Check the top of any tab to immediately see how the Diamondbacks are doing as a squad.
-2. **Rankings:** Quickly see who is performing above the team average (Sedona Red) and who is falling behind (Sonoran Sand).
+2. **Rankings:** Quickly see who is performing above the team average (Sedona Red) and who is falling behind (Teal).
 3. **Player Drill-Down:** Select any individual player to see their head-to-head comparison against the team average.
 
 ## 🚀 Quick Start
