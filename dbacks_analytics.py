@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-DbacksAnalytics Pro - Player Performance Dashboard
+Dbacks Analytics - Player Performance Dashboard
 
 Three-tab dashboard covering Pitching, Batting, and Fielding for the
 Arizona Diamondbacks. Starts at team level with drill-down to individual
@@ -23,7 +23,7 @@ import plotly.express as px
 
 # ── Page Config ──────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="DbacksAnalytics Pro",
+    page_title="Dbacks Analytics",
     page_icon="⚾",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -55,7 +55,7 @@ st.markdown(
 # ── Header ───────────────────────────────────────────────────────────────────
 st.markdown(
     '<div class="main-header">'
-    "<h1>⚾ DbacksAnalytics Pro</h1>"
+    "<h1>⚾ Dbacks Analytics</h1>"
     "<h3>Player Performance Dashboard</h3>"
     "</div>",
     unsafe_allow_html=True,
