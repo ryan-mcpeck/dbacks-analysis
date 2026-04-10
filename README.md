@@ -1,1 +1,170 @@
-# 🏟️ DbacksAnalytics Pro\n\n**Professional Arizona Diamondbacks Pitching Analysis Dashboard**\n\nA comprehensive baseball analytics platform combining pitch analysis, performance metrics, and visual insights for the Arizona Diamondbacks pitching staff using real MLB Statcast data.\n\n## ⭐ Features\n\n### 📊 Comprehensive Analysis\n- **Complete Pitch Analysis**: Velocity, movement, usage rates, and effectiveness metrics\n- **Role Classification**: Advanced starter/reliever/closer identification\n- **Performance Metrics**: Strike rates, whiff rates, zone rates, and sabermetrics\n- **Visual Insights**: Interactive charts, movement plots, and trend analysis\n\n### 🎯 Advanced Capabilities\n- **Real-time Data**: Direct integration with MLB Statcast via pybaseball\n- **Smart Filtering**: Date ranges, pitcher roles, and pitch types\n- **League Context**: Performance comparisons and benchmarking\n- **Trend Analysis**: Monthly usage patterns and velocity tracking\n\n### 🎨 Professional Interface\n- **D-backs Branding**: Team colors and professional styling\n- **Interactive Dashboard**: Streamlit-powered with tabbed navigation\n- **Responsive Design**: Works on desktop and mobile devices\n- **Export Ready**: Charts and data tables for presentations\n\n## 🚀 Quick Start\n\n### Prerequisites\n```bash\npip install streamlit pandas numpy plotly\n```\n\n### Run the Dashboard\n```bash\nstreamlit run dbacks_analytics_pro.py\n```\n\nThe dashboard will automatically load at `http://localhost:8501`\n\n## 📁 Project Structure\n\n```\ndbacks-analysis/\n├── dbacks_analytics_pro.py        # Main consolidated dashboard\n├── update_dbacks_statcast.py       # Data update utility\n├── dbacks_team_statcast.csv        # Statcast dataset\n├── README.md                       # This file\n├── .copilot-instructions.md        # AI assistant context\n└── [legacy files]                  # Original dashboard versions\n```\n\n## 📊 Dashboard Sections\n\n### 1. Overview Tab 📈\n- **Key Metrics**: Total pitches, active pitchers, average velocity, strike rate\n- **Pitch Distribution**: Team-wide usage patterns and role composition\n- **Staff Breakdown**: Detailed pitcher role classifications\n\n### 2. Pitch Analysis Tab ⚡\n- **Individual Analysis**: Detailed pitcher breakdowns with arsenal visualization\n- **Velocity Profiles**: Average speed by pitch type with consistency metrics\n- **Movement Charts**: Pitch break profiles from pitcher's perspective\n- **Usage Patterns**: Pitch selection and deployment strategies\n\n### 3. Performance Tab 🎯\n- **Team Metrics**: Strike rates and whiff rates by pitch type\n- **Leaderboards**: Top performers by customizable metrics\n- **Effectiveness**: Zone rate and contact management analysis\n- **Comparative Analysis**: Pitcher-to-pitcher performance evaluation\n\n### 4. Trends Tab 📈\n- **Monthly Patterns**: Usage trends throughout the season\n- **Velocity Tracking**: Speed changes over time with trend lines\n- **Development**: Pitcher improvement and adjustment analysis\n- **Seasonal Insights**: Performance evolution and adaptation\n\n## 🔧 Data Management\n\n### Update Statcast Data\n```bash\npython update_dbacks_statcast.py\n```\n\n**Features:**\n- Smart incremental updates (14-day lookback for corrections)\n- Full season refresh capability\n- Automatic duplicate detection and removal\n- Data validation and backup creation\n\n### Data Coverage\n- **Season**: 2025 complete season (March 20 - September 28)\n- **Scope**: 24,946+ pitches from all D-backs games\n- **Metrics**: Velocity, movement, location, outcomes, and situational data\n- **Update Frequency**: Daily during season, weekly during offseason\n\n## ⚙️ Advanced Usage\n\n### Filtering Options\n- **Date Range**: Custom start/end dates for specific analysis periods\n- **Pitcher Roles**: Starters, relievers, closers, openers, or utility players\n- **Pitch Types**: Focus on specific pitches or complete arsenals\n- **Minimum Thresholds**: Quality filters for meaningful sample sizes\n\n### Analysis Features\n- **Advanced Metrics**: Toggle comprehensive sabermetrics display\n- **Movement Data**: Pitch break visualization and analysis\n- **League Context**: Performance relative to MLB averages (when available)\n- **Export Capabilities**: Save charts and data for external use\n\n## 📚 Key Metrics Explained\n\n### Basic Metrics\n- **Strike Rate**: Percentage of pitches thrown for strikes\n- **Whiff Rate**: Percentage of swings that miss the ball\n- **Zone Rate**: Percentage of pitches thrown in the strike zone\n- **Usage Rate**: How often a pitcher throws each pitch type\n\n### Advanced Metrics\n- **Chase Rate**: Swings at pitches outside the strike zone\n- **Contact Rate**: Percentage of swings that make contact\n- **Movement**: Horizontal and vertical break from pitcher's perspective\n- **wOBA**: Weighted on-base average allowed\n\n## 🎯 Use Cases\n\n### For Coaches & Analysts\n- **Scouting Reports**: Detailed pitcher analysis for game planning\n- **Development Tracking**: Monitor pitcher improvement over time\n- **Strategy Optimization**: Identify effective pitch sequences and situations\n- **Performance Evaluation**: Objective metrics for roster decisions\n\n### For Fans & Media\n- **Player Analysis**: Deep dives into favorite pitchers' effectiveness\n- **Season Tracking**: Follow team performance throughout the year\n- **Comparison Studies**: Evaluate pitchers against team and league\n- **Trend Spotting**: Identify breakout performances and concerning patterns\n\n## 🔄 Updates & Maintenance\n\nThe dashboard automatically benefits from:\n- **Daily Data Refresh**: New games added automatically\n- **Metric Calculations**: Advanced statistics computed in real-time\n- **Performance Optimization**: Streamlit caching for faster loading\n- **Error Handling**: Robust data validation and user feedback\n\n## 💡 Tips for Best Results\n\n1. **Minimum Sample Sizes**: Use 100+ pitches for reliable pitcher analysis\n2. **Date Filtering**: Focus on recent performance for current evaluation\n3. **Role Context**: Compare pitchers within their roles (starter vs starter)\n4. **Multiple Metrics**: Don't rely on single statistics - use comprehensive view\n5. **Trend Analysis**: Look for patterns over time, not just snapshots\n\n## 🤝 Contributing\n\nThis project uses AI-assisted development. See `.copilot-instructions.md` for context and contribution guidelines.\n\n## 📄 License\n\nBuilt for Arizona Diamondbacks analysis. Data provided by MLB via pybaseball.\n\n---\n\n**DbacksAnalytics Pro** - *Professional baseball analytics for the Sedona Red and Black*\n
+# 🏟️ DbacksAnalytics Pro
+
+**Player Performance Dashboard — Arizona Diamondbacks**
+
+A comprehensive baseball analytics platform combining pitching, batting, and
+fielding analysis for the Arizona Diamondbacks using real MLB Statcast data.
+
+## ⭐ Features
+
+### Three-Tab Dashboard
+
+| Tab | Focus | Key Metrics |
+|-----|-------|-------------|
+| ⚾ **Pitching** | Strike out batters, avoid walks | K%, BB%, K/BB, Strike% |
+| 🏏 **Batting** | Get on base, drive in runs | AVG, OBP, Hits, RBI |
+| 🧤 **Fielding** | Zone coverage, recording outs | BIP, Zone Coverage%, Outs, Out Rate |
+
+### 📊 UX Pattern (all tabs)
+1. **Team-level metric cards** at the top showing totals and averages
+2. **Ranking bar chart** — all players sorted by the tab's primary metric with a team-average reference line
+3. **Player drill-down** — select any player from a dropdown
+4. **Comparison chart** — player metrics vs team averages (grouped bar)
+
+### 🎨 Professional Interface
+- **D-backs Branding**: Sedona Red (`#A71930`), Sonoran Sand (`#E3D4AD`), Black
+- **Interactive Dashboard**: Streamlit-powered with tabbed navigation
+- **Sidebar Controls**: Date range filter + pitcher role filter
+- **Responsive Design**: Works on desktop and mobile devices
+
+## 🚀 Quick Start
+
+### Prerequisites
+```bash
+pip install streamlit pandas numpy plotly
+```
+
+### Run the Dashboard
+```bash
+streamlit run dbacks_analytics_pro.py
+```
+
+The dashboard will open at `http://localhost:8501`
+
+## 📁 Project Structure
+
+```
+dbacks-analysis/
+├── dbacks_analytics_pro.py        # Main three-tab dashboard
+├── update_dbacks_statcast.py      # Data update utility
+├── dbacks_team_statcast.csv       # Statcast dataset (~25k pitches)
+├── gallen_contract_analysis.py    # Zac Gallen contract value analysis
+├── scout_mcp.py                   # MCP scouting interface
+├── launch_dashboard.bat           # Windows quick-launch script
+├── README.md                      # This file
+├── .copilot-instructions.md       # AI assistant context
+└── legacy/                        # Archived dashboard versions
+```
+
+## 📊 Dashboard Tabs
+
+### ⚾ Tab 1: Pitching
+*D-backs pitchers — when AZ is fielding*
+
+**Volume / Basic Metrics:**
+- **Total Pitches** — pitches thrown in the selected period
+- **Batters Faced** — plate appearances against D-backs pitchers
+- **Games Appeared** — unique game appearances
+
+**Performance Metrics (focus: strikeouts & avoiding walks):**
+- **K%** — Strikeout Rate: strikeouts / batters faced × 100
+- **BB%** — Walk Rate: walks / batters faced × 100
+- **K/BB** — Command quality in a single number
+- **Strike%** — Strikes thrown / total pitches × 100
+
+### 🏏 Tab 2: Batting
+*D-backs hitters — when AZ is at bat*
+
+> **Data Note:** The current `dbacks_team_statcast.csv` contains only
+> D-backs *pitching* rows (pybaseball `statcast(team='AZ')` returns
+> pitches thrown *by* the team). This tab is fully implemented and will
+> populate automatically once the data source is updated to include
+> D-backs batting rows.
+
+**Volume / Basic Metrics:**
+- **Plate Appearances** — total PA in the selected period
+- **At Bats** — official AB (PA minus walks, HBP, sac flies, etc.)
+- **Games Played** — unique games appeared in
+
+**Performance Metrics (focus: getting on base & driving in runs):**
+- **AVG** — Batting Average: hits / at bats
+- **OBP** — On-Base Percentage: (H + BB + HBP) / plate appearances
+- **Hits** — total hits (single + double + triple + HR)
+- **RBI** — approximated from post-plate-appearance score change
+
+### 🧤 Tab 3: Fielding
+*D-backs fielders — derived from pitching/fielding rows*
+
+> **Data Note:** Statcast pitch-level data does not include traditional
+> fielding box-score stats. Individual fielder attribution requires a
+> MLBAM player-ID lookup that is not bundled with the dataset; metrics
+> here are at the **team level**.
+
+**Team Fielding Metrics:**
+- **Balls in Play** — `type == 'X'` events while D-backs are fielding
+- **Zone Coverage** — in-zone BIP rate (zones 1–9)
+- **Outs Recorded** — out-producing events (double plays count as 2)
+- **Out Rate** — outs recorded / balls in play × 100
+
+**Visual Breakdowns:**
+- BIP type distribution (ground balls, fly balls, line drives, pop-ups)
+- BIP outcome chart (field outs, hits, errors, etc.)
+- Zone coverage % trend game-by-game
+
+## 🔧 Data Management
+
+### Update Statcast Data
+```bash
+python update_dbacks_statcast.py
+```
+
+**Features:**
+- Smart incremental updates (14-day lookback for corrections)
+- Full season refresh capability
+- Automatic duplicate detection and removal
+- Data validation and backup creation
+
+### Data Coverage
+- **Season**: 2025 complete season (March 20 – September 28)
+- **Scope**: 24,946+ pitches from all D-backs games
+- **Metrics**: Velocity, movement, location, outcomes, and situational data
+- **Update Frequency**: Daily during season, weekly during offseason
+
+## ⚙️ Sidebar Filters
+
+| Filter | Applies To | Description |
+|--------|-----------|-------------|
+| Start Date / End Date | All tabs | Restrict analysis to a date window |
+| Pitcher Role | Pitching tab | All / Starters / Relievers / Closers |
+
+## 📚 Key Metrics Explained
+
+| Metric | Formula | Context |
+|--------|---------|---------|
+| K% | SO / BF × 100 | Higher = more dominant pitcher |
+| BB% | BB / BF × 100 | Lower = better command |
+| K/BB | SO / BB | >3 considered excellent |
+| Strike% | Strikes / Pitches × 100 | >65% is above average |
+| AVG | H / AB | Context: MLB avg ~.248 |
+| OBP | (H+BB+HBP) / PA | Context: >. 340 is good |
+
+## 🗂️ Legacy Files
+
+Previous dashboard versions are stored in `legacy/`:
+- `dbacks_analytics_pro_original.py` — pitching-only dashboard (pre-refactor)
+- `dashboard.py` — initial proof-of-concept
+- `dashboard_enhanced.py` — enhanced version with more pitch metrics
+- `dashboard_improvements.py` — improvement patches
+
+## 🤝 Contributing
+
+This project uses AI-assisted development. See `.copilot-instructions.md`
+for context and contribution guidelines.
+
+## 📄 License
+
+Built for Arizona Diamondbacks analysis. Data provided by MLB via pybaseball.
+
+---
+
+**DbacksAnalytics Pro** — *Professional baseball analytics for the Sedona Red and Black* ⚾
