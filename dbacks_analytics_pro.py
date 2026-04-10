@@ -531,11 +531,11 @@ def ranking_bar_chart(df, player_col, metric_col, title, y_label, team_avg):
     fig.add_hline(
         y=team_avg,
         line_dash="dash",
-        line_color=DBACKS_BLACK,
+        line_color=DBACKS_SAND,
         line_width=2,
         annotation_text=f"Team Avg: {team_avg:.2f}",
         annotation_position="top right",
-        annotation_font_color=DBACKS_BLACK,
+        annotation_font_color=DBACKS_SAND,
     )
     fig.update_layout(
         title=title,
@@ -544,8 +544,11 @@ def ranking_bar_chart(df, player_col, metric_col, title, y_label, team_avg):
         height=450,
         xaxis_tickangle=-40,
         showlegend=False,
-        plot_bgcolor="white",
-        paper_bgcolor="white",
+        plot_bgcolor="rgba(0,0,0,0)",
+        paper_bgcolor="rgba(0,0,0,0)",
+        font=dict(color=DBACKS_SAND),
+        xaxis=dict(gridcolor="rgba(255,255,255,0.08)", linecolor="rgba(255,255,255,0.15)"),
+        yaxis=dict(gridcolor="rgba(255,255,255,0.08)", linecolor="rgba(255,255,255,0.15)"),
     )
     return fig
 
@@ -589,8 +592,11 @@ def player_vs_team_chart(player_name, player_vals, team_vals, metric_labels, tit
         title=title,
         height=420,
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
-        plot_bgcolor="white",
-        paper_bgcolor="white",
+        plot_bgcolor="rgba(0,0,0,0)",
+        paper_bgcolor="rgba(0,0,0,0)",
+        font=dict(color=DBACKS_SAND),
+        xaxis=dict(gridcolor="rgba(255,255,255,0.08)", linecolor="rgba(255,255,255,0.15)"),
+        yaxis=dict(gridcolor="rgba(255,255,255,0.08)", linecolor="rgba(255,255,255,0.15)"),
     )
     return fig
 
@@ -616,10 +622,18 @@ st.sidebar.title("⚾ Dashboard Controls")
 
 min_date = pitching_data_full["game_date"].min().date()
 max_date = pitching_data_full["game_date"].max().date()
+
+# Default start = first game of the most recent season in the dataset
+season_start = (
+    pitching_data_full[
+        pitching_data_full["game_date"].dt.year == max_date.year
+    ]["game_date"].min().date()
+)
+
 st.sidebar.markdown(f"**Data range:** {min_date} → {max_date}")
 
 start_date = st.sidebar.date_input(
-    "Start Date", value=min_date, min_value=min_date, max_value=max_date
+    "Start Date", value=season_start, min_value=min_date, max_value=max_date
 )
 end_date = st.sidebar.date_input(
     "End Date", value=max_date, min_value=min_date, max_value=max_date
@@ -968,7 +982,12 @@ with tab_field:
                 color_discrete_sequence=DBACKS_COLORS,
                 hole=0.35,
             )
-            fig_bip.update_layout(height=380)
+            fig_bip.update_layout(
+                height=380,
+                plot_bgcolor="rgba(0,0,0,0)",
+                paper_bgcolor="rgba(0,0,0,0)",
+                font=dict(color=DBACKS_SAND),
+            )
             st.plotly_chart(fig_bip, use_container_width=True)
 
             st.markdown("---")
@@ -994,8 +1013,11 @@ with tab_field:
             fig_outcomes.update_layout(
                 height=max(300, len(bip_outcomes) * 28),
                 showlegend=False,
-                plot_bgcolor="white",
-                paper_bgcolor="white",
+                plot_bgcolor="rgba(0,0,0,0)",
+                paper_bgcolor="rgba(0,0,0,0)",
+                font=dict(color=DBACKS_SAND),
+                xaxis=dict(gridcolor="rgba(255,255,255,0.08)", linecolor="rgba(255,255,255,0.15)"),
+                yaxis=dict(gridcolor="rgba(255,255,255,0.08)", linecolor="rgba(255,255,255,0.15)"),
             )
             st.plotly_chart(fig_outcomes, use_container_width=True)
 
@@ -1037,19 +1059,23 @@ with tab_field:
             fig_trend.add_hline(
                 y=fielding_summary["zone_coverage_pct"],
                 line_dash="dash",
-                line_color=DBACKS_BLACK,
+                line_color=DBACKS_SAND,
                 annotation_text=(
                     f"Season Avg: {fielding_summary['zone_coverage_pct']:.1f}%"
                 ),
                 annotation_position="top right",
+                annotation_font_color=DBACKS_SAND,
             )
             fig_trend.update_layout(
                 title="Zone Coverage % — Game by Game",
                 xaxis_title="Game Date",
                 yaxis_title="Zone Coverage %",
                 height=380,
-                plot_bgcolor="white",
-                paper_bgcolor="white",
+                plot_bgcolor="rgba(0,0,0,0)",
+                paper_bgcolor="rgba(0,0,0,0)",
+                font=dict(color=DBACKS_SAND),
+                xaxis=dict(gridcolor="rgba(255,255,255,0.08)", linecolor="rgba(255,255,255,0.15)"),
+                yaxis=dict(gridcolor="rgba(255,255,255,0.08)", linecolor="rgba(255,255,255,0.15)"),
             )
             st.plotly_chart(fig_trend, use_container_width=True)
 
